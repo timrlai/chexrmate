@@ -1,0 +1,61 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+.special-gothic-condensed-one-regular {
+  font-family: "Special Gothic Condensed One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+}
+
+#root,
+canvas {
+  min-height: 100svh;
+}
+
+main {
+  position: relative;
+}
+
+button {
+  background: oklch(0.3211 0 0 / 0.6);
+  color: #fff;
+  border-radius: 10px;
+  border: 0;
+  padding: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 0 10px #777;
+  transition: 0.5s all;
+}
+
+button:hover {
+  background: oklch(0.3211 0 0 / 0.9);
+}
+
+#xr-button-container {
+  display: flex;
+  justify-content: center;
+  width: 100svw;
+  position: absolute;
+  left: 0;
+  bottom: 2svh;
+  z-index: 1;
+}

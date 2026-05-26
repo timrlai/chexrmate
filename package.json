@@ -1,0 +1,49 @@
+{
+  "name": "three-react-xr-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint --max-warnings 0 .",
+    "lint:fix": "eslint --max-warnings 0 . --fix",
+    "format": "prettier --write . --ignore-unknown",
+    "format:check": "prettier --check . --ignore-unknown",
+    "check": "bun run lint && bun run format:check",
+    "dev": "vite --host",
+    "tunnel": "cloudflared tunnel --url http://localhost:5173",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@react-three/rapier": "^2.2.0",
+    "@react-three/uikit": "^1.0.72",
+    "@react-three/uikit-lucide": "^1.0.72",
+    "@react-three/xr": "^6.6.29",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/bun": "^1.3.14",
+    "@types/node": "^24.12.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.184.1",
+    "@vitejs/plugin-basic-ssl": "^2.3.0",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "prettier": "^3.8.3",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.59.2",
+    "vite": "^8.0.14",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-glsl": "^1.6.0",
+    "vite-plugin-image-optimizer": "^2.0.3"
+  }
+}
