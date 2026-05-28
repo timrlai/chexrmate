@@ -108,10 +108,12 @@ const Piece = forwardRef<PieceHandle, PieceProps>(function Piece(
         mesh.receiveShadow = true;
 
         const material = mesh.material as MaterialWithMap;
-        material.color = new Color(isSelected ? highlightColor : pieceColor);
+        material.color = new Color(
+          isSelected && player === "w" ? highlightColor : pieceColor,
+        );
       }
     });
-  }, [clone, pieceColor, isSelected]);
+  }, [clone, pieceColor, isSelected, player]);
 
   const playLift = useCallback(() => {
     const actionName = names[0];
