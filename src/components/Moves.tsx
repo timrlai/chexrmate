@@ -23,52 +23,50 @@ export default function Moves({ type, moves }: MovesProps) {
               ? "Queen"
               : "King";
   const fontFamilies = useTTF(specialGothicCondensed);
+  const fontSize = 6;
   return (
     <Hud>
       <PerspectiveCamera makeDefault position={[0, 0, 10]}>
-        <group position={[1.2, 0.4, -2]}>
+        <group position={[1.2, 0, -2]}>
           <Container
+            maxHeight={100}
             flexDirection="column"
+            flexWrap="wrap"
+            justifyContent="flex-end"
             alignContent="flex-end"
             gap={2}
             opacity={0.8}
+            fontFamilies={fontFamilies}
+            fontSize={fontSize}
           >
             <Container
-              fontFamilies={fontFamilies}
               backgroundColor="#065f74"
               borderRadius={2}
               paddingX={4}
               paddingY={2}
             >
-              <Text color="#fffad4" fontSize={8}>
-                {pieceName}:
-              </Text>
+              <Text color="#fffad4">{pieceName}:</Text>
             </Container>
             {moves.length > 0 ? (
               moves.map((move) => (
                 <Container
-                  fontFamilies={fontFamilies}
                   backgroundColor="#065f74"
                   borderRadius={2}
                   paddingX={4}
                   paddingY={2}
+                  flexShrink={1}
                 >
-                  <Text color="#fffad4" fontSize={8}>
-                    {move.toUpperCase()}
-                  </Text>
+                  <Text color="#fffad4">{move.toUpperCase()}</Text>
                 </Container>
               ))
             ) : (
               <Container
-                fontFamilies={fontFamilies}
                 backgroundColor="#8e2e00"
                 borderRadius={2}
                 paddingX={4}
                 paddingY={2}
               >
-                <Text color="#fffad4" fontSize={8}>
-                  None
-                </Text>
+                <Text color="#fffad4">None</Text>
               </Container>
             )}
           </Container>
