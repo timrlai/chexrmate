@@ -41,14 +41,17 @@ export default function GameStatus({
   return (
     <Hud>
       <PerspectiveCamera makeDefault position={[0, 0, 10]}>
-        <group position={[0, 0.5, -2]}>
+        <group position={[0, 0.4, -2]}>
           <Container
+            flexDirection="column"
+            gap={2}
+            textAlign="center"
             fontFamilies={fontFamilies}
             fontSize={statusFontSize}
             color="#8e2e00"
             opacity={0.8}
           >
-            {isCheck && <Text>Check!</Text>}
+            {isCheck && !isCheckMate && <Text>Check!</Text>}
             {isCheckMate && <Text fontSize={statusFontSize}>Checkmate!</Text>}
             {isStaleMate && <Text fontSize={statusFontSize}>Stalemate!</Text>}
             {isDraw && <Text fontSize={statusFontSize}>Draw!</Text>}
