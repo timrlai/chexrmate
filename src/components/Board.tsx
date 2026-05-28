@@ -342,7 +342,7 @@ export default function Board({
         isThreefoldRepetition={gameState.isThreefoldRepetition()}
       />
 
-      {promotion && <Promotion promote={promote} />}
+      {promotion && <Promotion square={promotion.to} promote={promote} />}
     </group>
   );
 }

@@ -26,7 +26,9 @@ type PieceProps = {
   type: PieceSymbol;
   player: PlayerColor;
   square: Square;
-  squarePositions: SquarePositions;
+  squarePositions?: SquarePositions;
+  position?: [number, number, number];
+  rotation?: [number, number, number];
   isSelected: boolean;
   scale?: number;
   onSelect: (event: ThreeEvent<MouseEvent>) => void;
@@ -52,6 +54,8 @@ const Piece = forwardRef<PieceHandle, PieceProps>(function Piece(
     square,
     squarePositions,
     isSelected,
+    position = [0, 0, 0],
+    rotation = [0, 0, 0],
     scale = 1,
     onSelect,
   }: PieceProps,
@@ -214,11 +218,12 @@ const Piece = forwardRef<PieceHandle, PieceProps>(function Piece(
     <Suspense fallback={null}>
       <group
         ref={groupRef}
-        position={squarePositions[square]}
+        position={squarePositions ? squarePositions[square] : position}
+        rotation={rotation}
         scale={scale}
         onClick={(event) => handleSelect(event)}
       >
-        <group position={[0, 2.5, 0]} rotation={[0, 0, 0]}>
+        <group position={[0, 2.5, 0]}>
           <Container
             backgroundColor={isSelected ? highlightColor : pieceColor}
             borderRadius={30}
