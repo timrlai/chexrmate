@@ -14,6 +14,7 @@ import specialGothicCondensed from "../assets/fonts/SpecialGothicCondensedOne-Re
 import Piece, { type PieceHandle } from "./Piece";
 import type { ThreeEvent } from "@react-three/fiber";
 import GameStatus from "./GameStatus";
+import Promotion from "./Promotion";
 
 export type MaterialWithMap = Material & {
   map: { needsUpdate: boolean };
@@ -123,6 +124,10 @@ export default function Board({
   const [pieceType, setPieceType] = useState<PieceSymbol | null>(null);
   const [selectedSquare, setSelectedSquare] = useState<Square | null>(null);
   const [legalMoves, setLegalMoves] = useState<Square[]>([]);
+  const [promotion, setPromotion] = useState<{
+    from: Square;
+    to: Square;
+  } | null>(null);
   const pieceRefs = useRef<Record<string, PieceHandle>>({});
   const gameBoard = gameState.board();
   const squares: JSX.Element[] = [];
@@ -131,12 +136,32 @@ export default function Board({
   const lightColor = "#fffad4";
   const darkColor = "#065f74";
 
+  const resetSelection = () => {
+    setSelectedPiece(null);
+    setSelectedSquare(null);
+    setLegalMoves([]);
+    setPromotion(null);
+  };
+
+  const opponentMove = () => {
+    const moves = gameState.moves();
+    const randomMove = moves[Math.floor(Math.random() * moves.length)];
+    const selectedMove = gameState.move(randomMove);
+    if (pieceRefs.current) {
+      const opponentPiece = pieceRefs.current[selectedMove.from];
+      opponentPiece.playLift();
+      opponentPiece.playMoveAnimation(squarePositions[selectedMove.to]);
+      opponentPiece.playSettle();
+    }
+    setTimeout(() => {
+      setGameState(new Chess(gameState.fen()));
+    }, 300);
+  };
+
   const selectSquare = (square: Square) => {
     if (!selectedPiece) return;
 
-    const piece = gameState.get(square);
-
-    if (piece && !legalMoves.includes(square)) {
+    if (gameState.get(square) && !legalMoves.includes(square)) {
       setSelectedPiece(square);
       return;
     }
@@ -153,28 +178,44 @@ export default function Board({
     }
 
     setTimeout(() => {
+      const piece = gameState.get(selectedPiece);
+      const isPromotion =
+        piece?.type === "p" &&
+        ((piece.color === "w" && square.endsWith("8")) ||
+          (piece.color === "b" && square.endsWith("1")));
+
+      if (isPromotion) {
+        setPromotion({ from: selectedPiece, to: square });
+        return;
+      }
+
       gameState.move({
         from: selectedPiece,
         to: square,
       });
-      setGameState(new Chess(gameState.fen()));
-      setSelectedPiece(null);
-      setSelectedSquare(null);
-      setLegalMoves([]);
 
-      const moves = gameState.moves();
-      const randomMove = moves[Math.floor(Math.random() * moves.length)];
-      const selectedMove = gameState.move(randomMove);
-      if (pieceRefs.current) {
-        const opponentPiece = pieceRefs.current[selectedMove.from];
-        opponentPiece.playLift();
-        opponentPiece.playMoveAnimation(squarePositions[selectedMove.to]);
-        opponentPiece.playSettle();
-      }
-      setTimeout(() => {
-        setGameState(new Chess(gameState.fen()));
-      }, 300);
+      setGameState(new Chess(gameState.fen()));
+
+      resetSelection();
+      opponentMove();
     }, 300);
+  };
+
+  const promote = (piece: PieceSymbol) => {
+    if (!promotion) return;
+
+    const { from, to } = promotion;
+
+    gameState.move({
+      from,
+      to,
+      promotion: piece,
+    });
+
+    setGameState(new Chess(gameState.fen()));
+
+    resetSelection();
+    opponentMove();
   };
 
   const selectPiece = (square: Square, type: PieceSymbol) => {
@@ -289,6 +330,8 @@ export default function Board({
         isDraw={gameState.isDraw()}
         isThreefoldRepetition={gameState.isThreefoldRepetition()}
       />
+
+      {promotion && <Promotion promote={promote} />}
     </group>
   );
 }
