@@ -30,24 +30,40 @@ canvas {
   min-height: 100svh;
 }
 
+header,
 main {
   position: relative;
 }
 
+h1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100svw;
+  margin: 0;
+  padding: 10px;
+  font-size: 2rem;
+  text-align: center;
+  background: oklch(45% 0.08 220 / 0.8);
+  color: #fffad4;
+  box-shadow: 0 0 10px #777;
+}
+
 button {
-  background: oklch(0.3211 0 0 / 0.6);
-  color: #fff;
+  background: oklch(45% 0.08 220 / 0.6);
+  color: #fffad4;
   border-radius: 10px;
   border: 0;
-  padding: 10px;
-  font-size: 1.5rem;
+  padding: 5px 20px;
+  font-size: 4rem;
   cursor: pointer;
   box-shadow: 0 0 10px #777;
   transition: 0.5s all;
 }
 
 button:hover {
-  background: oklch(0.3211 0 0 / 0.9);
+  background: oklch(45% 0.08 220 / 0.9);
 }
 
 #xr-button-container {
@@ -56,6 +72,6 @@ button:hover {
   width: 100svw;
   position: absolute;
   left: 0;
-  bottom: 2svh;
+  bottom: 10svh;
   z-index: 1;
 }
