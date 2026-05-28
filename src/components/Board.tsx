@@ -39,6 +39,7 @@ type LabelledSquareProps = {
 type MoveHighlightProps = {
   square: Square;
   squarePositions: SquarePositions;
+  onSelect?: (event: ThreeEvent<MouseEvent>) => void;
 };
 
 type BoardProps = {
@@ -94,7 +95,11 @@ function LabelledSquare({
   );
 }
 
-function MoveHighlight({ square, squarePositions }: MoveHighlightProps) {
+function MoveHighlight({
+  square,
+  squarePositions,
+  onSelect,
+}: MoveHighlightProps) {
   const squarePosition = squarePositions[square];
   return (
     <mesh
@@ -102,6 +107,7 @@ function MoveHighlight({ square, squarePositions }: MoveHighlightProps) {
         new Vector3(squarePosition.x, squarePosition.y + 0.1, squarePosition.z)
       }
       rotation={[-Math.PI / 2, 0, 0]}
+      onClick={onSelect}
     >
       <circleGeometry args={[1, 32]} />
       <meshBasicMaterial
@@ -316,6 +322,10 @@ export default function Board({
         <MoveHighlight
           square={square as Square}
           squarePositions={squarePositions}
+          onSelect={(event: ThreeEvent<MouseEvent>) => {
+            event.stopPropagation();
+            selectSquare(square);
+          }}
         />
       ))}
 
