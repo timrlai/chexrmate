@@ -219,7 +219,6 @@ const Piece = forwardRef<PieceHandle, PieceProps>(function Piece(
       <group
         ref={groupRef}
         position={squarePositions ? squarePositions[square] : position}
-        rotation={rotation}
         scale={scale}
         onClick={(event) => handleSelect(event)}
       >
@@ -241,15 +240,17 @@ const Piece = forwardRef<PieceHandle, PieceProps>(function Piece(
           </Container>
         </group>
         <group
-          rotation={[
-            0,
-            type === "n" && player === "w"
-              ? Math.PI
-              : type === "k"
-                ? Math.PI / 2
-                : 0,
-            0,
-          ]}
+          rotation={
+            rotation || [
+              0,
+              type === "n" && player === "w"
+                ? Math.PI
+                : type === "k"
+                  ? Math.PI / 2
+                  : 0,
+              0,
+            ]
+          }
         >
           <primitive ref={pieceRef} object={clone} />
         </group>
