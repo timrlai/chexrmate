@@ -48,15 +48,58 @@ export default function GameStatus({
             textAlign="center"
             fontFamilies={fontFamilies}
             fontSize={statusFontSize}
-            color="#8e2e00"
+            color="#fffad4"
             opacity={0.8}
           >
-            {isCheck && !isCheckMate && <Text>Check!</Text>}
-            {isCheckMate && <Text fontSize={statusFontSize}>Checkmate!</Text>}
-            {isStaleMate && <Text fontSize={statusFontSize}>Stalemate!</Text>}
-            {isDraw && <Text fontSize={statusFontSize}>Draw!</Text>}
+            {isCheck && !isCheckMate && (
+              <Container
+                backgroundColor="#8e2e00"
+                borderRadius={4}
+                paddingX={6}
+                paddingY={3}
+              >
+                <Text>Check!</Text>
+              </Container>
+            )}
+            {isCheckMate && (
+              <Container
+                backgroundColor="#8e2e00"
+                borderRadius={4}
+                paddingX={6}
+                paddingY={3}
+              >
+                <Text>Checkmate!</Text>
+              </Container>
+            )}
+            {isStaleMate && (
+              <Container
+                backgroundColor="#8e2e00"
+                borderRadius={4}
+                paddingX={6}
+                paddingY={3}
+              >
+                <Text>Stalemate!</Text>
+              </Container>
+            )}
+            {isDraw && (
+              <Container
+                backgroundColor="#8e2e00"
+                borderRadius={4}
+                paddingX={6}
+                paddingY={3}
+              >
+                <Text>Draw!</Text>
+              </Container>
+            )}
             {isThreefoldRepetition && (
-              <Text fontSize={statusFontSize}>Threefold Repetition!</Text>
+              <Container
+                backgroundColor="#8e2e00"
+                borderRadius={4}
+                paddingX={6}
+                paddingY={3}
+              >
+                <Text>Threefold Repetition!</Text>
+              </Container>
             )}
           </Container>
         </group>
