@@ -13,7 +13,7 @@ import { Chess, type PieceSymbol, type Square } from "chess.js";
 import specialGothicCondensed from "../assets/fonts/SpecialGothicCondensedOne-Regular.ttf";
 import Piece, { type PieceHandle } from "./Piece";
 import type { ThreeEvent } from "@react-three/fiber";
-import Moves from "./Moves";
+import GameStatus from "./GameStatus";
 
 export type MaterialWithMap = Material & {
   map: { needsUpdate: boolean };
@@ -280,9 +280,15 @@ export default function Board({
 
       {squares}
 
-      {selectedPiece && pieceType && (
-        <Moves type={pieceType} moves={legalMoves} />
-      )}
+      <GameStatus
+        type={pieceType}
+        moves={legalMoves}
+        isCheck={gameState.isCheck()}
+        isCheckMate={gameState.isCheckmate()}
+        isStaleMate={gameState.isStalemate()}
+        isDraw={gameState.isDraw()}
+        isThreefoldRepetition={gameState.isThreefoldRepetition()}
+      />
     </group>
   );
 }
