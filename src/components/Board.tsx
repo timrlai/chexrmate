@@ -144,6 +144,7 @@ export default function Board({
 
   const resetSelection = () => {
     setSelectedPiece(null);
+    setPieceType(null);
     setSelectedSquare(null);
     setLegalMoves([]);
     setPromotion(null);
