@@ -6,7 +6,9 @@ import Board from "./Board";
 import Opponent from "./Opponent";
 import Locomotion from "./Locomotion";
 
-const store = createXRStore();
+const store = createXRStore({
+  controller: { rayPointer: { rayModel: { color: "#065f74" } } },
+});
 
 export default function App() {
   return (
