@@ -6,7 +6,7 @@ import viteCompression from "vite-plugin-compression";
 
 // https://vite.dev/config/
 export default defineConfig({
-  server: { host: true, https: false, strictPort: true, allowedHosts: true },
+  // server: { host: true, https: false, strictPort: true, allowedHosts: true },
   plugins: [
     react(),
     basicSsl(),
