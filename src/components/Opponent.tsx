@@ -3,8 +3,6 @@ import { ClampToEdgeWrapping, FileLoader } from "three";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { useTexture, Billboard } from "@react-three/drei";
 
-import opponentTexture from "../assets/img/sprites/timrlai_chess_spritesheet.png";
-
 type OpponentProps = {
   position?: [number, number, number];
   rotation?: [number, number, number];
@@ -26,6 +24,7 @@ export default function Opponent({
   rotation = [0, 0, 0],
   scale = 5,
 }: OpponentProps) {
+  const opponentTexture = "/img/sprites/timrlai_chess_spritesheet.png";
   const texture = useTexture(opponentTexture, (texture) => {
     texture.wrapS = ClampToEdgeWrapping;
     texture.wrapT = ClampToEdgeWrapping;
