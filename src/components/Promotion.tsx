@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useTTF, Container, Text } from "@react-three/uikit";
 import type { PieceSymbol, Square } from "chess.js";
 
-import specialGothicCondensed from "../assets/fonts/SpecialGothicCondensedOne-Regular.ttf";
 import { Billboard } from "@react-three/drei";
 import Piece from "./Piece";
 
@@ -12,6 +11,7 @@ type PromotionProps = {
 };
 
 export default function Promotion({ square, promote }: PromotionProps) {
+  const specialGothicCondensed = "/fonts/SpecialGothicCondensedOne-Regular.ttf";
   const fontFamilies = useTTF(specialGothicCondensed);
   const buttonColor = "#065f74";
   const hoverColor = "#8e2e00";
