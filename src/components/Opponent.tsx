@@ -24,7 +24,7 @@ export default function Opponent({
   rotation = [0, 0, 0],
   scale = 5,
 }: OpponentProps) {
-  const opponentTexture = "/img/sprites/timrlai_chess_spritesheet.png";
+  const opponentTexture = "/textures/timrlai_chess_spritesheet.png";
   const texture = useTexture(opponentTexture, (texture) => {
     texture.wrapS = ClampToEdgeWrapping;
     texture.wrapT = ClampToEdgeWrapping;
