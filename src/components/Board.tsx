@@ -10,7 +10,6 @@ import {
 import { useTTF, Container, Text } from "@react-three/uikit";
 import { Chess, type PieceSymbol, type Square } from "chess.js";
 
-import specialGothicCondensed from "../assets/fonts/SpecialGothicCondensedOne-Regular.ttf";
 import Piece, { type PieceHandle } from "./Piece";
 import type { ThreeEvent } from "@react-three/fiber";
 import GameStatus from "./GameStatus";
@@ -58,6 +57,7 @@ function LabelledSquare({
   selectedSquare = false,
   onSelect,
 }: LabelledSquareProps) {
+  const specialGothicCondensed = "/fonts/SpecialGothicCondensedOne-Regular.ttf";
   const meshRef = useRef<Mesh>(null);
   const fontFamilies = useTTF(specialGothicCondensed);
 
