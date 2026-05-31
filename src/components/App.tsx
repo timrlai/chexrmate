@@ -25,8 +25,8 @@ export default function App() {
         </button>
       </nav>
       <Canvas shadows>
-        <XR store={store}>
-          <Suspense fallback={null}>
+        <Suspense fallback={null}>
+          <XR store={store}>
             <Opponent />
 
             <Board />
@@ -49,8 +49,8 @@ export default function App() {
             <Locomotion />
 
             <OrbitControls />
-          </Suspense>
-        </XR>
+          </XR>
+        </Suspense>
       </Canvas>
     </main>
   );
