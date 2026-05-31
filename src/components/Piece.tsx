@@ -19,7 +19,6 @@ import {
 } from "chess.js";
 
 import type { MaterialWithMap, SquarePositions } from "./Board";
-import specialGothicCondensed from "../assets/fonts/SpecialGothicCondensedOne-Regular.ttf";
 import { useFrame, type ThreeEvent } from "@react-three/fiber";
 
 type PieceProps = {
@@ -100,6 +99,7 @@ const Piece = forwardRef<PieceHandle, PieceProps>(function Piece(
   const highlightColor = 0x8e2e00;
   const pieceColor = player === "w" ? lightColor : darkColor;
   const textColor = player === "w" ? darkColor : lightColor;
+  const specialGothicCondensed = "/fonts/SpecialGothicCondensedOne-Regular.ttf";
   const fontFamilies = useTTF(specialGothicCondensed);
 
   useEffect(() => {

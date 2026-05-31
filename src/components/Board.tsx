@@ -57,8 +57,8 @@ function LabelledSquare({
   selectedSquare = false,
   onSelect,
 }: LabelledSquareProps) {
-  const specialGothicCondensed = "/fonts/SpecialGothicCondensedOne-Regular.ttf";
   const meshRef = useRef<Mesh>(null);
+  const specialGothicCondensed = "/fonts/SpecialGothicCondensedOne-Regular.ttf";
   const fontFamilies = useTTF(specialGothicCondensed);
 
   useEffect(() => {
