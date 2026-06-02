@@ -28,7 +28,7 @@ type PieceProps = {
   square: Square;
   squarePositions?: SquarePositions;
   position?: [number, number, number];
-  rotation?: [number, number, number] | undefined;
+  rotation?: [number, number, number];
   isSelected: boolean;
   scale?: number;
   onSelect: (event: ThreeEvent<MouseEvent>) => void;
@@ -56,7 +56,7 @@ const Piece = forwardRef<PieceHandle, PieceProps>(function Piece(
     squarePositions,
     isSelected,
     position = [0, 0, 0],
-    rotation,
+    rotation = [0, 0, 0],
     scale = 1,
     onSelect,
   }: PieceProps,
@@ -239,9 +239,9 @@ const Piece = forwardRef<PieceHandle, PieceProps>(function Piece(
             </Text>
           </Container>
         </group>
-        <group
-          rotation={
-            rotation || [
+        <group rotation={rotation}>
+          <group
+            rotation={[
               0,
               type === "n" && player === "w"
                 ? Math.PI
@@ -249,10 +249,10 @@ const Piece = forwardRef<PieceHandle, PieceProps>(function Piece(
                   ? Math.PI / 2
                   : 0,
               0,
-            ]
-          }
-        >
-          <primitive ref={pieceRef} object={clone} />
+            ]}
+          >
+            <primitive ref={pieceRef} object={clone} />
+          </group>
         </group>
       </group>
     </Suspense>
