@@ -45,7 +45,7 @@ export default function GameStatus({
             flexDirection="column"
             gap={2}
             textAlign="center"
-            fontFamilies={fontFamilies}
+            fontFamilies={fontFamilies ?? undefined}
             fontSize={statusFontSize}
             color="#fffad4"
             opacity={0.8}
@@ -112,7 +112,7 @@ export default function GameStatus({
               alignContent="flex-end"
               gap={2}
               opacity={0.8}
-              fontFamilies={fontFamilies}
+              fontFamilies={fontFamilies ?? undefined}
               fontSize={moveFontSize}
             >
               <Container

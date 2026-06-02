@@ -259,7 +259,7 @@ export default function Board({
         >
           {leftCol && (
             <LabelledSquare
-              fontFamilies={fontFamilies}
+              fontFamilies={fontFamilies ?? undefined}
               squareSize={squareSize}
               position={[-squareSize, 0, 0]}
               bgColor={lightColor}
@@ -269,7 +269,7 @@ export default function Board({
           )}
           {bottomRow && (
             <LabelledSquare
-              fontFamilies={fontFamilies}
+              fontFamilies={fontFamilies ?? undefined}
               squareSize={squareSize}
               position={[0, -squareSize, 0]}
               bgColor={lightColor}
@@ -278,7 +278,7 @@ export default function Board({
             />
           )}
           <LabelledSquare
-            fontFamilies={fontFamilies}
+            fontFamilies={fontFamilies ?? undefined}
             squareSize={squareSize}
             position={[0, 0, 0]}
             bgColor={bgColor}
@@ -313,7 +313,7 @@ export default function Board({
                 }
               }}
               key={square.square}
-              fontFamilies={fontFamilies}
+              fontFamilies={fontFamilies ?? undefined}
               type={square.type}
               player={square.color}
               square={square.square}
@@ -339,7 +339,7 @@ export default function Board({
       {squares}
 
       <GameStatus
-        fontFamilies={fontFamilies}
+        fontFamilies={fontFamilies ?? undefined}
         type={pieceType}
         moves={legalMoves}
         isCheck={gameState.isCheck()}
@@ -351,7 +351,7 @@ export default function Board({
 
       {promotion && (
         <Promotion
-          fontFamilies={fontFamilies}
+          fontFamilies={fontFamilies ?? undefined}
           square={promotion.to}
           promote={promote}
         />
