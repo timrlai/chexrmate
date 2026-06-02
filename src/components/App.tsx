@@ -1,16 +1,49 @@
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
-import { XR, createXRStore } from "@react-three/xr";
+import { type XRStore } from "@react-three/xr";
 import Board from "./Board";
 import Opponent from "./Opponent";
 import Locomotion from "./Locomotion";
+import XRScene from "./XRScene";
 
-const store = createXRStore({
-  controller: { rayPointer: { rayModel: { color: "#065f74" } } },
-});
+type ComponentFallbackProps = {
+  componentName: string;
+};
+
+type XRComponentFallbackProps = ComponentFallbackProps & {
+  store: XRStore | null;
+  session: XRSession | null;
+};
+
+function ComponentFallback({ componentName }: ComponentFallbackProps) {
+  console.error(`${componentName} not loaded`);
+  return null;
+}
+
+function XRComponentFallback({
+  componentName,
+  store,
+  session,
+}: XRComponentFallbackProps) {
+  console.error(`${componentName} not loaded`);
+  console.error("XR store:", store);
+  console.error("XR session:", session);
+  return null;
+}
 
 export default function App() {
+  const [xrStore, setXrStore] = useState<XRStore | null>(null);
+  const [xrSession, setXrSession] = useState<XRSession | null>(null);
+
+  const onEnterXr = () => {
+    if (!xrStore) return;
+    xrStore.enterAR().then((session) => {
+      console.log("session:", session);
+      if (!xrSession && session) setXrSession(session);
+    });
+  };
+
   return (
     <main>
       <header>
@@ -18,18 +51,30 @@ export default function App() {
       </header>
       <nav id="xr-button-container">
         <button
-          onClick={() => store.enterAR()}
+          onClick={onEnterXr}
           className="special-gothic-condensed-one-regular"
         >
           Enter AR
         </button>
       </nav>
       <Canvas shadows>
-        <Suspense fallback={null}>
-          <XR store={store}>
-            <Opponent />
+        <XRScene existingStore={xrStore} setXrStore={setXrStore}>
+          <>
+            <Suspense fallback={<ComponentFallback componentName="Opponent" />}>
+              <Opponent />
+            </Suspense>
 
-            <Board />
+            <Suspense
+              fallback={
+                <XRComponentFallback
+                  componentName="Board"
+                  store={xrStore}
+                  session={xrSession}
+                />
+              }
+            >
+              <Board />
+            </Suspense>
 
             <ambientLight
               position={[0, 10, -12]}
@@ -46,11 +91,23 @@ export default function App() {
 
             <Environment preset="park" environmentIntensity={0.5} />
 
-            <Locomotion />
-
             <OrbitControls />
-          </XR>
-        </Suspense>
+
+            {xrStore && xrSession && (
+              <Suspense
+                fallback={
+                  <XRComponentFallback
+                    componentName="Locomotion"
+                    store={xrStore}
+                    session={xrSession}
+                  />
+                }
+              >
+                <Locomotion />
+              </Suspense>
+            )}
+          </>
+        </XRScene>
       </Canvas>
     </main>
   );
