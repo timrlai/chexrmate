@@ -66,6 +66,16 @@ button:hover {
   background: oklch(45% 0.08 220 / 0.9);
 }
 
+button[disabled],
+button[disabled]:hover {
+  background: oklch(45% 0.08 220 / 0.5);
+  color: #d2cfbd;
+}
+
+button[disabled]:hover {
+  cursor: default;
+}
+
 #xr-button-container {
   display: flex;
   justify-content: center;
