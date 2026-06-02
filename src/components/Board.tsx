@@ -7,7 +7,7 @@ import {
   Vector3,
   type ColorRepresentation,
 } from "three";
-import { useTTF, Container, Text } from "@react-three/uikit";
+import { Container, Text, type FontFamilies } from "@react-three/uikit";
 import { Chess, type PieceSymbol, type Square } from "chess.js";
 
 import Piece, { type PieceHandle } from "./Piece";
@@ -25,6 +25,7 @@ export type SquarePositions = {
 };
 
 type LabelledSquareProps = {
+  fontFamilies: FontFamilies | undefined;
   position?: [number, number, number];
   squareSize: number;
   bgColor: string;
@@ -42,12 +43,14 @@ type MoveHighlightProps = {
 };
 
 type BoardProps = {
+  fontFamilies: FontFamilies | undefined;
   position?: [number, number, number];
   rotation?: [number, number, number];
   squareSize?: number;
 };
 
 function LabelledSquare({
+  fontFamilies,
   position,
   squareSize,
   bgColor,
@@ -58,8 +61,6 @@ function LabelledSquare({
   onSelect,
 }: LabelledSquareProps) {
   const meshRef = useRef<Mesh>(null);
-  const specialGothicCondensed = "/fonts/SpecialGothicCondensedOne-Regular.ttf";
-  const fontFamilies = useTTF(specialGothicCondensed);
 
   useEffect(() => {
     if (!meshRef.current) return;
@@ -83,7 +84,7 @@ function LabelledSquare({
       <group position={[0, 0, 0.1]}>
         <Container>
           <Text
-            fontFamilies={fontFamilies}
+            fontFamilies={fontFamilies ?? undefined}
             fontSize={52}
             color={selectedSquare ? 0xfffad4 : textColor}
           >
@@ -121,6 +122,7 @@ function MoveHighlight({
 }
 
 export default function Board({
+  fontFamilies,
   position = [-7, -3, -15],
   rotation = [0, 0, 0],
   squareSize = 2,
@@ -257,6 +259,7 @@ export default function Board({
         >
           {leftCol && (
             <LabelledSquare
+              fontFamilies={fontFamilies}
               squareSize={squareSize}
               position={[-squareSize, 0, 0]}
               bgColor={lightColor}
@@ -266,6 +269,7 @@ export default function Board({
           )}
           {bottomRow && (
             <LabelledSquare
+              fontFamilies={fontFamilies}
               squareSize={squareSize}
               position={[0, -squareSize, 0]}
               bgColor={lightColor}
@@ -274,6 +278,7 @@ export default function Board({
             />
           )}
           <LabelledSquare
+            fontFamilies={fontFamilies}
             squareSize={squareSize}
             position={[0, 0, 0]}
             bgColor={bgColor}
@@ -308,6 +313,7 @@ export default function Board({
                 }
               }}
               key={square.square}
+              fontFamilies={fontFamilies}
               type={square.type}
               player={square.color}
               square={square.square}

@@ -11,7 +11,7 @@ import {
 import { Color, LoopOnce, Object3D, Vector3, type Mesh } from "three";
 import { SkeletonUtils } from "three/examples/jsm/Addons.js";
 import { useGLTF, useAnimations } from "@react-three/drei";
-import { useTTF, Container, Text } from "@react-three/uikit";
+import { Container, Text, type FontFamilies } from "@react-three/uikit";
 import {
   type Color as PlayerColor,
   type PieceSymbol,
@@ -22,6 +22,7 @@ import type { MaterialWithMap, SquarePositions } from "./Board";
 import { useFrame, type ThreeEvent } from "@react-three/fiber";
 
 type PieceProps = {
+  fontFamilies: FontFamilies | undefined;
   type: PieceSymbol;
   player: PlayerColor;
   square: Square;
@@ -48,6 +49,7 @@ export type PieceHandle = {
 
 const Piece = forwardRef<PieceHandle, PieceProps>(function Piece(
   {
+    fontFamilies,
     type = "p",
     player = "w",
     square,
@@ -99,8 +101,6 @@ const Piece = forwardRef<PieceHandle, PieceProps>(function Piece(
   const highlightColor = 0x8e2e00;
   const pieceColor = player === "w" ? lightColor : darkColor;
   const textColor = player === "w" ? darkColor : lightColor;
-  const specialGothicCondensed = "/fonts/SpecialGothicCondensedOne-Regular.ttf";
-  const fontFamilies = useTTF(specialGothicCondensed);
 
   useEffect(() => {
     if (!clone) return;
