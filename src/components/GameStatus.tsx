@@ -1,8 +1,9 @@
 import { Hud, PerspectiveCamera } from "@react-three/drei";
-import { useTTF, Container, Text } from "@react-three/uikit";
+import { Container, Text, type FontFamilies } from "@react-three/uikit";
 import type { PieceSymbol, Square } from "chess.js";
 
 type GameStatusProps = {
+  fontFamilies: FontFamilies | undefined;
   type: PieceSymbol | null;
   moves: Square[];
   isCheck: boolean;
@@ -13,6 +14,7 @@ type GameStatusProps = {
 };
 
 export default function GameStatus({
+  fontFamilies,
   type,
   moves,
   isCheck,
@@ -33,8 +35,6 @@ export default function GameStatus({
             : type === "q"
               ? "Queen"
               : "King";
-  const specialGothicCondensed = "/fonts/SpecialGothicCondensedOne-Regular.ttf";
-  const fontFamilies = useTTF(specialGothicCondensed);
   const statusFontSize = 24;
   const moveFontSize = 6;
   return (

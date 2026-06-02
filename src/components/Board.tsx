@@ -339,6 +339,7 @@ export default function Board({
       {squares}
 
       <GameStatus
+        fontFamilies={fontFamilies}
         type={pieceType}
         moves={legalMoves}
         isCheck={gameState.isCheck()}
