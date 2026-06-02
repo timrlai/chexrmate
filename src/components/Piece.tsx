@@ -231,7 +231,7 @@ const Piece = forwardRef<PieceHandle, PieceProps>(function Piece(
             opacity={0.8}
           >
             <Text
-              fontFamilies={fontFamilies}
+              fontFamilies={fontFamilies ?? undefined}
               fontSize={24}
               color={isSelected ? lightColor : textColor}
             >

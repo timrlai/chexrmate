@@ -26,7 +26,7 @@ export default function Promotion({
   return (
     <Billboard position={[2, 7, -1]} lockX lockZ>
       <Piece
-        fontFamilies={fontFamilies}
+        fontFamilies={fontFamilies ?? undefined}
         type="q"
         player="w"
         square={square}
@@ -36,7 +36,7 @@ export default function Promotion({
         onSelect={() => promote("q")}
       />
       <Piece
-        fontFamilies={fontFamilies}
+        fontFamilies={fontFamilies ?? undefined}
         type="r"
         player="w"
         square={square}
@@ -46,7 +46,7 @@ export default function Promotion({
         onSelect={() => promote("q")}
       />
       <Piece
-        fontFamilies={fontFamilies}
+        fontFamilies={fontFamilies ?? undefined}
         type="b"
         player="w"
         square={square}
@@ -56,7 +56,7 @@ export default function Promotion({
         onSelect={() => promote("q")}
       />
       <Piece
-        fontFamilies={fontFamilies}
+        fontFamilies={fontFamilies ?? undefined}
         type="n"
         player="w"
         square={square}
@@ -68,7 +68,7 @@ export default function Promotion({
       />
       <group scale={10}>
         <Container
-          fontFamilies={fontFamilies}
+          fontFamilies={fontFamilies ?? undefined}
           fontSize={fontSize}
           flexDirection="column"
           gap={2}
