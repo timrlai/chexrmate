@@ -1,18 +1,21 @@
 import { useState } from "react";
-import { useTTF, Container, Text } from "@react-three/uikit";
+import { Container, Text, type FontFamilies } from "@react-three/uikit";
 import type { PieceSymbol, Square } from "chess.js";
 
 import { Billboard } from "@react-three/drei";
 import Piece from "./Piece";
 
 type PromotionProps = {
+  fontFamilies: FontFamilies | undefined;
   square: Square;
   promote: (piece: PieceSymbol) => void;
 };
 
-export default function Promotion({ square, promote }: PromotionProps) {
-  const specialGothicCondensed = "/fonts/SpecialGothicCondensedOne-Regular.ttf";
-  const fontFamilies = useTTF(specialGothicCondensed);
+export default function Promotion({
+  fontFamilies,
+  square,
+  promote,
+}: PromotionProps) {
   const buttonColor = "#065f74";
   const hoverColor = "#8e2e00";
   const [queenColor, setQueenColor] = useState(buttonColor);
@@ -23,6 +26,7 @@ export default function Promotion({ square, promote }: PromotionProps) {
   return (
     <Billboard position={[2, 7, -1]} lockX lockZ>
       <Piece
+        fontFamilies={fontFamilies}
         type="q"
         player="w"
         square={square}
@@ -32,6 +36,7 @@ export default function Promotion({ square, promote }: PromotionProps) {
         onSelect={() => promote("q")}
       />
       <Piece
+        fontFamilies={fontFamilies}
         type="r"
         player="w"
         square={square}
@@ -41,6 +46,7 @@ export default function Promotion({ square, promote }: PromotionProps) {
         onSelect={() => promote("q")}
       />
       <Piece
+        fontFamilies={fontFamilies}
         type="b"
         player="w"
         square={square}
@@ -50,6 +56,7 @@ export default function Promotion({ square, promote }: PromotionProps) {
         onSelect={() => promote("q")}
       />
       <Piece
+        fontFamilies={fontFamilies}
         type="n"
         player="w"
         square={square}
