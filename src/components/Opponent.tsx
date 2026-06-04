@@ -9,8 +9,17 @@ type OpponentProps = {
   scale?: number;
 };
 
+type Frame = {
+  frame: {
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+  };
+};
+
 type SpriteData = {
-  frames: any[];
+  frames: Frame[];
   meta: {
     size: {
       w: number;
@@ -25,38 +34,34 @@ export default function Opponent({
   scale = 5,
 }: OpponentProps) {
   const opponentTexture = "/textures/timrlai_chess_spritesheet.png";
+  const opponentSprite = "/sprites/timrlai_chess_sprites.json";
+
   const texture = useTexture(opponentTexture, (texture) => {
     texture.wrapS = ClampToEdgeWrapping;
     texture.wrapT = ClampToEdgeWrapping;
   });
 
-  const spriteData = useLoader(
-    FileLoader,
-    "/sprites/timrlai_chess_sprites.json",
-    (loader) => {
-      loader.setResponseType("json");
-    },
-  ) as SpriteData;
+  const spriteData = useLoader(FileLoader, opponentSprite, (loader) => {
+    loader.setResponseType("json");
+  }) as SpriteData;
 
-  const frames = spriteData.frames;
-  const atlasWidth = spriteData.meta.size.w;
-  const atlasHeight = spriteData.meta.size.h;
-
+  const { frames, meta } = spriteData;
+  const { w: metaW, h: metaH } = meta.size;
   const [frameIndex, setFrameIndex] = useState(0);
   const fps = 16;
 
   useFrame((_, delta) => {
     const nextFrameIndex = (frameIndex + delta * fps) % frames.length;
+    const { x, y, w, h } = frames[Math.floor(nextFrameIndex)].frame;
+    const offsetX = x / metaW;
+    const offsetY = 1 - (y + h) / metaH;
+    const repeatX = w / metaW;
+    const repeatY = h / metaH;
+
+    texture.offset.set(offsetX, offsetY);
+    texture.repeat.set(repeatX, repeatY);
+
     setFrameIndex(nextFrameIndex);
-
-    const frame = frames[Math.floor(nextFrameIndex)].frame;
-
-    texture.offset.set(
-      frame.x / atlasWidth,
-      1 - (frame.y + frame.h) / atlasHeight,
-    );
-
-    texture.repeat.set(frame.w / atlasWidth, frame.h / atlasHeight);
   });
 
   return (
