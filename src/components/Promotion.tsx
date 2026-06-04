@@ -69,6 +69,8 @@ export default function Promotion({
       <group scale={10}>
         <Container
           fontFamilies={fontFamilies ?? undefined}
+          fontFamily={fontFamilies ? "gothic" : undefined}
+          fontWeight={fontFamilies ? "normal" : undefined}
           fontSize={fontSize}
           flexDirection="column"
           gap={2}

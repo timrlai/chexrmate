@@ -232,6 +232,8 @@ const Piece = forwardRef<PieceHandle, PieceProps>(function Piece(
           >
             <Text
               fontFamilies={fontFamilies ?? undefined}
+              fontFamily={fontFamilies ? "gothic" : undefined}
+              fontWeight={fontFamilies ? "normal" : undefined}
               fontSize={24}
               color={isSelected ? lightColor : textColor}
             >

@@ -46,6 +46,8 @@ export default function GameStatus({
             gap={2}
             textAlign="center"
             fontFamilies={fontFamilies ?? undefined}
+            fontFamily={fontFamilies ? "gothic" : undefined}
+            fontWeight={fontFamilies ? "normal" : undefined}
             fontSize={statusFontSize}
             color="#fffad4"
             opacity={0.8}
@@ -113,6 +115,8 @@ export default function GameStatus({
               gap={2}
               opacity={0.8}
               fontFamilies={fontFamilies ?? undefined}
+              fontFamily={fontFamilies ? "gothic" : undefined}
+              fontWeight={fontFamilies ? "normal" : undefined}
               fontSize={moveFontSize}
             >
               <Container

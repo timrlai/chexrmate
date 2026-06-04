@@ -85,6 +85,8 @@ function LabelledSquare({
         <Container>
           <Text
             fontFamilies={fontFamilies ?? undefined}
+            fontFamily={fontFamilies ? "gothic" : undefined}
+            fontWeight={fontFamilies ? "normal" : undefined}
             fontSize={52}
             color={selectedSquare ? 0xfffad4 : textColor}
           >
