@@ -4,12 +4,13 @@ import { Environment, OrbitControls } from "@react-three/drei";
 import type { XRStore } from "@react-three/xr";
 import type { FontFamilies } from "@react-three/uikit";
 
+import LoadingScreen from "./LoadingScreen";
+import XRButton from "./XRButton";
+import PreloadFont from "./PreloadFont";
+import XRScene from "./XRScene";
 import Board from "./Board";
 import Opponent from "./Opponent";
 import Locomotion from "./Locomotion";
-import XRScene from "./XRScene";
-import PreloadFont from "./PreloadFont";
-import XRButton from "./XRButton";
 
 type ComponentFallbackProps = {
   componentName: string;
@@ -42,19 +43,28 @@ export default function App() {
   const [fontFamilies, setFontFamilies] = useState<FontFamilies | undefined>(
     undefined,
   );
+  const [progress, setProgress] = useState(0);
+  const loading = !fontFamilies || !xrStore || progress < 100;
 
   return (
     <main>
       <header>
         <h1>CheXRmate</h1>
       </header>
-      <XRButton
-        store={xrStore}
-        existingSession={xrSession}
-        setSession={setXrSession}
-      />
+      {loading && <LoadingScreen progress={progress} />}
+      {!loading && (
+        <XRButton
+          store={xrStore}
+          existingSession={xrSession}
+          setSession={setXrSession}
+        />
+      )}
       <Canvas shadows>
-        <XRScene existingStore={xrStore} setXrStore={setXrStore}>
+        <XRScene
+          existingStore={xrStore}
+          setXrStore={setXrStore}
+          setProgress={setProgress}
+        >
           <>
             <Suspense
               fallback={<ComponentFallback componentName="PreloadFont" />}
