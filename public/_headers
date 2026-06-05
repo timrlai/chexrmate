@@ -1,0 +1,21 @@
+/*
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
+  Cross-Origin-Resource-Policy: same-origin
+  Permissions-Policy: xr-spatial-tracking=(self)
+
+/fonts/*.woff
+  Content-Type: font/woff
+  Content-Encoding: identity
+
+/fonts/*.woff2
+  Content-Type: font/woff2
+  Content-Encoding: identity
+
+/fonts/*.ttf
+  Content-Type: font/ttf
+  Content-Encoding: identity
+
+/fonts/*.json
+  Content-Type: application/json
+  Content-Encoding: identity
