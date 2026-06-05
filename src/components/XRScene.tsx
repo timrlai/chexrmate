@@ -1,10 +1,12 @@
 import { Suspense, useEffect, type JSX } from "react";
+import { useProgress } from "@react-three/drei";
 import { createXRStore, XR, type XRStore } from "@react-three/xr";
 
 type XRSceneProps = {
   children: JSX.Element;
   existingStore: XRStore | null;
   setXrStore: (store: XRStore) => void;
+  setProgress: (progress: number) => void;
 };
 
 type XRFallbackProps = { store: XRStore };
@@ -23,7 +25,14 @@ export default function XRScene({
   children,
   existingStore,
   setXrStore,
+  setProgress,
 }: XRSceneProps) {
+  const { progress } = useProgress();
+
+  useEffect(() => {
+    setProgress(progress);
+  }, [progress, setProgress]);
+
   useEffect(() => {
     if (!existingStore && store) setXrStore(store);
   }, [existingStore, setXrStore]);
