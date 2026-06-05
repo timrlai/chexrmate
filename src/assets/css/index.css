@@ -30,9 +30,15 @@ canvas {
   min-height: 100svh;
 }
 
+canvas {
+  position: relative;
+  z-index: -1;
+}
+
 header,
 main {
   position: relative;
+  z-index: 2;
 }
 
 h1 {
@@ -84,4 +90,44 @@ button[disabled]:hover {
   left: 0;
   bottom: 10svh;
   z-index: 1;
+}
+
+progress {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 80svw;
+  height: 30px;
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-bar,
+progress::-moz-progress-bar {
+  background-color: #065f74;
+  border: 2px solid #fffad4;
+  border-radius: 10px;
+}
+
+#loading {
+  position: relative;
+}
+
+#loading-content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10;
+  width: 100svw;
+  height: 100svh;
+  font-size: 8rem;
+  background: black;
+  color: #fffad4;
+}
+
+#loading-content h2 {
+  font-size: 4rem;
 }
